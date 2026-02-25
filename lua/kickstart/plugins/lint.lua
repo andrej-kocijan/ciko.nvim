@@ -5,8 +5,14 @@ return {
     event = { 'BufReadPre', 'BufNewFile' },
     config = function()
       local lint = require 'lint'
+
       lint.linters_by_ft = {
         markdown = { 'markdownlint' },
+        -- java = { 'checkstyle' },
+        json = { 'jsonlint' },
+        -- text = { 'vale' },
+        bash = { 'shellcheck' },
+        python = { 'ruff' },
       }
 
       -- To allow other plugins to add linters to require('lint').linters_by_ft,
