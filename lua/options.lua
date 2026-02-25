@@ -72,3 +72,18 @@ vim.o.scrolloff = 10
 vim.o.confirm = true
 
 -- vim: ts=2 sts=2 sw=2 et
+
+-- MY OPTIONS
+vim.o.relativenumber = true
+vim.o.tabstop = 4
+vim.o.shiftwidth = 4
+vim.o.expandtab = true
+
+-- Map BNFC grammar files to the lbnf filetype
+vim.filetype.add {
+  extension = { cf = 'lbnf' },
+}
+
+-- tab title
+vim.opt.title = true
+vim.opt.titlestring = [[%t %h%m%r%w - %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]
