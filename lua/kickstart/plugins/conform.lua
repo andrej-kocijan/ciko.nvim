@@ -34,6 +34,12 @@ return {
         markdown = { 'markdownlint' },
         bash = { 'shfmt' },
         python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
+        swift = { 'swiftformat' },
+        json = { 'prettierd', stop_after_first = true },
+        javascript = { 'prettierd', stop_after_first = true },
+        typescript = { 'prettierd', stop_after_first = true },
+        javascriptreact = { 'prettierd', stop_after_first = true },
+        typescriptreact = { 'prettierd', stop_after_first = true },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

@@ -19,6 +19,8 @@ return {
         'vimdoc',
         'java',
         'javascript',
+        'typescript',
+        'tsx',
         'latex',
         'python',
         'swift',
