@@ -108,8 +108,9 @@ return {
         ts_ls = {},
         jdtls = {},
         bashls = {},
-        ty = {},
-        -- pyright = {},
+        -- ty = {},
+        pyright = {},
+        texlab = {},
 
         -- Special Lua config: uses on_init to inject Neovim runtime into workspace
         -- so that lua_ls understands vim.* globals without lazydev.
@@ -154,6 +155,7 @@ return {
         'ruff',
         'shfmt',
         'swiftformat',
+        'tex-fmt',
         'prettierd',
         'eslint_d',
       })

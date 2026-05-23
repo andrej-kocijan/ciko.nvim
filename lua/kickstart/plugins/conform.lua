@@ -42,6 +42,7 @@ return {
         typescript = { 'prettierd', stop_after_first = true },
         javascriptreact = { 'prettierd', stop_after_first = true },
         typescriptreact = { 'prettierd', stop_after_first = true },
+        tex = { 'tex-fmt' },
         -- Conform can also run multiple formatters sequentially
         -- python = { "isort", "black" },
         --

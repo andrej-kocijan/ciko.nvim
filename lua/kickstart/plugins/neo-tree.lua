@@ -19,6 +19,15 @@ return {
   ---@type neotree.Config
   opts = {
     filesystem = {
+      filtered_items = {
+        always_show_by_pattern = {
+          '.env*',
+        },
+        never_show = { -- remains hidden even if visible is toggled to true, this overrides always_show
+          '.DS_Store',
+          '__pycache__',
+        },
+      },
       window = {
         mappings = {
           ['\\'] = 'close_window',

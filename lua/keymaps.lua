@@ -72,3 +72,6 @@ vim.keymap.set('n', 'L', '$')
 vim.keymap.set('i', '<C-c>', '<Esc>')
 -- vim.keymap.set({ 'n', 'v' }, 's', 's', { noremap = true, silent = true })
 vim.keymap.set('i', '<Tab>', '<Tab>', { noremap = true, silent = true })
+
+-- Show full diagnostics
+vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostics [F]loat' })
