@@ -1,13 +1,5 @@
 -- autopairs
 -- https://github.com/windwp/nvim-autopairs
 
----@module 'lazy'
----@type LazySpec
-return {
-  'windwp/nvim-autopairs',
-  event = 'InsertEnter',
-  config = true,
-  opts = {
-    check_ts = true,
-  },
-}
+vim.pack.add { 'https://github.com/windwp/nvim-autopairs' }
+require('nvim-autopairs').setup {}

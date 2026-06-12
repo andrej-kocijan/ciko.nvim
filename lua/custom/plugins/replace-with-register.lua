@@ -1,7 +1,1 @@
-return {}
--- return {
---   {
---     'vim-scripts/ReplaceWithRegister',
---     keys = {},
---   },
--- }
+-- vim.pack.add { 'https://github.com/vim-scripts/ReplaceWithRegister' }

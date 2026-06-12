@@ -1,23 +1,9 @@
-return {
-  {
-    'leath-dub/snipe.nvim',
-    keys = {
-      {
-        'gb',
-        function()
-          require('snipe').open_buffer_menu()
-        end,
-        desc = 'Open Snipe buffer menu',
-      },
-    },
-    opts = {
-      ui = {
-
-        open_win_override = {
-          -- title = "My Window Title",
-          border = 'rounded', -- use "rounded" for rounded border
-        },
-      },
+vim.pack.add { 'https://github.com/leath-dub/snipe.nvim' }
+require('snipe').setup {
+  ui = {
+    open_win_override = {
+      border = 'rounded',
     },
   },
 }
+vim.keymap.set('n', 'gb', function() require('snipe').open_buffer_menu() end, { desc = 'Open Snipe buffer menu' })
