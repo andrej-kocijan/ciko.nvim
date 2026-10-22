@@ -81,5 +81,10 @@ vim.keymap.set('i', '<C-c>', '<Esc>')
 -- vim.keymap.set({ 'n', 'v' }, 's', 's', { noremap = true, silent = true })
 vim.keymap.set('i', '<Tab>', '<Tab>', { noremap = true, silent = true })
 
+-- On a blank line, i/a/A start at the correct indent (formatters strip whitespace from blank lines)
+for _, key in ipairs { 'i', 'a', 'A' } do
+  vim.keymap.set('n', key, function() return vim.fn.getline('.'):match '^%s*$' and '"_cc' or key end, { expr = true })
+end
+
 -- Show full diagnostics
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostics [F]loat' })
