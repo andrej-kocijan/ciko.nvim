@@ -103,7 +103,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
 --  See `:help lsp-config` for information about keys and how to configure
 ---@type table<string, vim.lsp.Config>
 local servers = {
-  ts_ls = {},
   jdtls = {},
   bashls = {},
   -- ty = {},
@@ -199,5 +198,8 @@ vim.lsp.config('sourcekit', {
   root_markers = { 'Package.swift', '*.xcodeproj', '*.xcworkspace', '.git' },
 })
 vim.lsp.enable 'sourcekit'
+
+-- tsc is TypeScript 7's builtin LSP — install via npm (`npm i -g typescript@7`), not Mason
+vim.lsp.enable 'tsc'
 
 -- vim: ts=2 sts=2 sw=2 et
