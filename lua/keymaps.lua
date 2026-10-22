@@ -83,7 +83,7 @@ vim.keymap.set('i', '<Tab>', '<Tab>', { noremap = true, silent = true })
 
 -- On a blank line, i/a/A start at the correct indent (formatters strip whitespace from blank lines)
 for _, key in ipairs { 'i', 'a', 'A' } do
-  vim.keymap.set('n', key, function() return vim.fn.getline('.'):match '^%s*$' and '"_cc' or key end, { expr = true })
+  vim.keymap.set('n', key, function() return vim.v.count == 0 and vim.fn.getline('.'):match '^%s*$' and '"_cc' or key end, { expr = true })
 end
 
 -- Show full diagnostics
