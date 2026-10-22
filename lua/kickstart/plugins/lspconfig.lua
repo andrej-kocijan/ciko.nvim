@@ -109,6 +109,7 @@ local servers = {
   -- ty = {},
   pyright = {},
   texlab = {},
+  clangd = {},
 
   -- Special Lua config: uses on_init to inject Neovim runtime into workspace
   -- so that lua_ls understands vim.* globals without lazydev.
@@ -171,6 +172,7 @@ vim.list_extend(ensure_installed, {
   'ruff',
   'shfmt',
   'swiftformat',
+  'clang-format',
   'tex-fmt',
   'prettierd',
   'eslint_d',
@@ -184,9 +186,10 @@ for name, server in pairs(servers) do
 end
 
 -- sourcekit-lsp ships with Xcode — configure directly, not via Mason
+-- c/cpp are handled by clangd instead, to avoid both clients attaching to the same buffer
 vim.lsp.config('sourcekit', {
   cmd = { 'sourcekit-lsp' },
-  filetypes = { 'swift', 'objc', 'objcpp', 'c', 'cpp' },
+  filetypes = { 'swift', 'objc', 'objcpp' },
   root_markers = { 'Package.swift', '*.xcodeproj', '*.xcworkspace', '.git' },
 })
 vim.lsp.enable 'sourcekit'
