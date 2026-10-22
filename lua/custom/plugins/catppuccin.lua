@@ -1,12 +1,7 @@
 vim.pack.add { 'https://github.com/catppuccin/nvim' }
 require('catppuccin').setup {
   flavour = 'mocha',
-  integrations = {
-    cmp = false,
-    mason = true,
-    gitsigns = true,
-    nvimtree = true,
-    telescope = true,
-  },
+  -- Enable integrations for every installed plugin (detected via vim.pack)
+  auto_integrations = true,
 }
 vim.cmd.colorscheme 'catppuccin'
