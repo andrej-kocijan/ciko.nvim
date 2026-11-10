@@ -108,7 +108,10 @@ local servers = {
   -- ty = {},
   pyright = {},
   texlab = {},
-  clangd = {},
+  -- --query-driver lets clangd ask Homebrew GCC for its include paths (bits/stdc++.h) when a .clangd names it as the compiler
+  clangd = {
+    cmd = { 'clangd', '--query-driver=/opt/homebrew/bin/g++-*' },
+  },
 
   -- Special Lua config: uses on_init to inject Neovim runtime into workspace
   -- so that lua_ls understands vim.* globals without lazydev.
@@ -188,6 +191,11 @@ require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 for name, server in pairs(servers) do
   vim.lsp.config(name, server)
   vim.lsp.enable(name)
+end
+
+-- nvb: share one Pyright document across a notebook's code cells
+if vim.g.nbv then
+  require('nbv.lsp').enable 'pyright'
 end
 
 -- sourcekit-lsp ships with Xcode — configure directly, not via Mason
