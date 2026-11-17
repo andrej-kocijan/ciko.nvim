@@ -105,12 +105,16 @@ vim.api.nvim_create_autocmd('LspAttach', {
 -- Enable the following language servers
 --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
 --  See `:help lsp-config` for information about keys and how to configure
+-- Python type checker: 'ty' or 'pyright'
+local python_lsp = 'ty'
+
 ---@type table<string, vim.lsp.Config>
 local servers = {
   jdtls = {},
   bashls = {},
-  -- ty = {},
-  pyright = {},
+  [python_lsp] = {},
+  -- the type checker already reports undefined names
+  ruff = { init_options = { settings = { lint = { ignore = { 'F821' } } } } },
   texlab = {},
   -- --query-driver lets clangd ask Homebrew GCC for its include paths (bits/stdc++.h) when a .clangd names it as the compiler
   clangd = {
@@ -161,7 +165,6 @@ vim.list_extend(ensure_installed, {
   'shellcheck',
 
   -- Formatters / tools (not LSP servers)
-  'ruff',
   'shfmt',
   'swiftformat',
   'clang-format',
@@ -178,7 +181,7 @@ for name, server in pairs(servers) do
 end
 
 -- nvb: share one Pyright document across a notebook's code cells
-if vim.g.nbv then require('nbv.lsp').enable 'pyright' end
+if vim.g.nbv then require('nbv.lsp').enable(python_lsp) end
 
 -- sourcekit-lsp ships with Xcode — enable directly, not via Mason
 -- c/cpp are handled by clangd instead, to avoid both clients attaching to the same buffer

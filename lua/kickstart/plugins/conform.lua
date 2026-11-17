@@ -14,7 +14,7 @@ require('conform').setup {
     lua = { 'stylua' },
     markdown = { 'markdownlint' },
     bash = { 'shfmt' },
-    python = { 'ruff_fix', 'ruff_format', 'ruff_organize_imports' },
+    python = { 'ruff_organize_imports', 'ruff_format' },
     swift = { 'swiftformat' },
     c = { 'clang-format' },
     cpp = { 'clang-format' },
