@@ -81,7 +81,8 @@ vim.o.scrolloff = 10
 -- See `:help 'confirm'`
 vim.o.confirm = true
 
--- vim: ts=2 sts=2 sw=2 et
+-- Default border for all floating windows (hover, diagnostics, completion, ...)
+vim.o.winborder = 'rounded'
 
 -- MY OPTIONS
 vim.o.relativenumber = true
@@ -95,5 +96,7 @@ vim.filetype.add {
 }
 
 -- tab title
-vim.opt.title = true
-vim.opt.titlestring = [[%t %h%m%r%w - %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]
+vim.o.title = true
+vim.o.titlestring = [[%t %h%m%r%w - %{v:progname} (%{tabpagenr()} of %{tabpagenr('$')})]]
+
+-- vim: ts=2 sts=2 sw=2 et

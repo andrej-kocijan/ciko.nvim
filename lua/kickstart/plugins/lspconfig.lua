@@ -44,7 +44,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
     -- for LSP related items. It sets the mode, buffer and description for us each time.
     local map = function(keys, func, desc, mode)
       mode = mode or 'n'
-      vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+      vim.keymap.set(mode, keys, func, { buf = event.buf, desc = 'LSP: ' .. desc })
     end
 
     -- Rename the variable under your cursor.
@@ -68,13 +68,13 @@ vim.api.nvim_create_autocmd('LspAttach', {
     if client and client:supports_method('textDocument/documentHighlight', event.buf) then
       local highlight_augroup = vim.api.nvim_create_augroup('kickstart-lsp-highlight', { clear = false })
       vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-        buffer = event.buf,
+        buf = event.buf,
         group = highlight_augroup,
         callback = vim.lsp.buf.document_highlight,
       })
 
       vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-        buffer = event.buf,
+        buf = event.buf,
         group = highlight_augroup,
         callback = vim.lsp.buf.clear_references,
       })
@@ -83,7 +83,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         group = vim.api.nvim_create_augroup('kickstart-lsp-detach', { clear = true }),
         callback = function(event2)
           vim.lsp.buf.clear_references()
-          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buffer = event2.buf }
+          vim.api.nvim_clear_autocmds { group = 'kickstart-lsp-highlight', buf = event2.buf }
         end,
       })
     end
@@ -174,7 +174,6 @@ vim.list_extend(ensure_installed, {
   'markdownlint',
   'jsonlint',
   'shellcheck',
-  'checkstyle',
 
   -- Formatters / tools (not LSP servers)
   'ruff',
@@ -194,17 +193,11 @@ for name, server in pairs(servers) do
 end
 
 -- nvb: share one Pyright document across a notebook's code cells
-if vim.g.nbv then
-  require('nbv.lsp').enable 'pyright'
-end
+if vim.g.nbv then require('nbv.lsp').enable 'pyright' end
 
--- sourcekit-lsp ships with Xcode — configure directly, not via Mason
+-- sourcekit-lsp ships with Xcode — enable directly, not via Mason
 -- c/cpp are handled by clangd instead, to avoid both clients attaching to the same buffer
-vim.lsp.config('sourcekit', {
-  cmd = { 'sourcekit-lsp' },
-  filetypes = { 'swift', 'objc', 'objcpp' },
-  root_markers = { 'Package.swift', '*.xcodeproj', '*.xcworkspace', '.git' },
-})
+vim.lsp.config('sourcekit', { filetypes = { 'swift', 'objc', 'objcpp' } })
 vim.lsp.enable 'sourcekit'
 
 -- tsc is TypeScript 7's builtin LSP — install via npm (`npm i -g typescript@7`), not Mason

@@ -6,7 +6,6 @@ require('conform').setup {
   notify_on_error = false,
   format_on_save = {
     timeout_ms = 500,
-    lsp_format = 'fallback',
   },
   default_format_opts = {
     lsp_format = 'fallback',
@@ -19,11 +18,11 @@ require('conform').setup {
     swift = { 'swiftformat' },
     c = { 'clang-format' },
     cpp = { 'clang-format' },
-    json = { 'prettierd', stop_after_first = true },
-    javascript = { 'prettierd', stop_after_first = true },
-    typescript = { 'prettierd', stop_after_first = true },
-    javascriptreact = { 'prettierd', stop_after_first = true },
-    typescriptreact = { 'prettierd', stop_after_first = true },
+    json = { 'prettierd' },
+    javascript = { 'prettierd' },
+    typescript = { 'prettierd' },
+    javascriptreact = { 'prettierd' },
+    typescriptreact = { 'prettierd' },
     tex = { 'tex-fmt' },
   },
   formatters = {

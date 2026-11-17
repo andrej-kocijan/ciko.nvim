@@ -10,7 +10,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.diagnostic.config {
   update_in_insert = false,
   severity_sort = true,
-  float = { border = 'rounded', source = 'if_many' },
+  float = { source = 'if_many' },
   underline = { severity = { min = vim.diagnostic.severity.WARN } },
 
   -- Can switch between these as you prefer
@@ -72,14 +72,13 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   callback = function() vim.hl.on_yank() end,
 })
 
--- vim: ts=2 sts=2 sw=2 et
-
 -- My Keymaps
 vim.keymap.set('n', 'H', '_')
 vim.keymap.set('n', 'L', '$')
 vim.keymap.set('i', '<C-c>', '<Esc>')
--- vim.keymap.set({ 'n', 'v' }, 's', 's', { noremap = true, silent = true })
-vim.keymap.set('i', '<Tab>', '<Tab>', { noremap = true, silent = true })
+-- Plain <Tab>: overrides Neovim's default "jump to next snippet field if a snippet is active"
+-- (blink.cmp's buffer-local <Tab> still handles snippet jumping first)
+vim.keymap.set('i', '<Tab>', '<Tab>')
 
 -- On a blank line, i/a/A start at the correct indent (formatters strip whitespace from blank lines)
 for _, key in ipairs { 'i', 'a', 'A' } do
@@ -88,3 +87,5 @@ end
 
 -- Show full diagnostics
 vim.keymap.set('n', '<leader>df', vim.diagnostic.open_float, { desc = '[D]iagnostics [F]loat' })
+
+-- vim: ts=2 sts=2 sw=2 et

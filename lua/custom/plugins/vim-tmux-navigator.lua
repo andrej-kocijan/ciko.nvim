@@ -6,9 +6,7 @@
 local function set(name) return (vim.env[name] or '') ~= '' end
 local in_rex = set 'REX_BLOCK' and not set 'TMUX'
 
-if in_rex then
-  vim.g.tmux_navigator_no_mappings = 1
-end
+if in_rex then vim.g.tmux_navigator_no_mappings = 1 end
 
 vim.pack.add { 'https://github.com/christoomey/vim-tmux-navigator' }
 
@@ -24,11 +22,7 @@ if in_rex then
       -- Already at the edge of nvim's layout: move to the neighbouring Rex pane.
       -- --wrap matches the Rex-side binding.
       vim.system({ 'rex', 'focus', direction, '--wrap' }, { text = true }, function(res)
-        if res.code ~= 0 then
-          vim.schedule(function()
-            vim.notify('rex focus ' .. direction .. ': ' .. vim.trim(res.stderr or ''), vim.log.levels.WARN)
-          end)
-        end
+        if res.code ~= 0 then vim.schedule(function() vim.notify('rex focus ' .. direction .. ': ' .. vim.trim(res.stderr or ''), vim.log.levels.WARN) end) end
       end)
     end, { desc = 'Move focus to the ' .. direction .. ' window or Rex pane' })
   end

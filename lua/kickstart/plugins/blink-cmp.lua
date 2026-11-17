@@ -55,7 +55,6 @@ require('blink.cmp').setup {
       auto_show = true,
       auto_show_delay_ms = 500,
       treesitter_highlighting = true,
-      window = { border = 'rounded' },
     },
     accept = {
       auto_brackets = { enabled = true },
