@@ -1,20 +1,16 @@
 local function gh(repo) return 'https://github.com/' .. repo end
 
--- [[ Snippet Engine ]]
-
--- NOTE: You can also specify plugin using a version range for its git tag.
---  See `:help vim.version.range()` for more info
-vim.pack.add { { src = gh 'L3MON4D3/LuaSnip', version = vim.version.range '2.*' } }
-require('luasnip').setup {}
-
--- `friendly-snippets` contains a variety of premade snippets.
---    See the README about individual language/framework/plugin snippets:
---    https://github.com/rafamadriz/friendly-snippets
+-- [[ Snippets ]]
+-- Snippets sent by LSP servers are expanded by Neovim's built-in `vim.snippet`.
+--
+-- `friendly-snippets` contains a variety of premade snippets; blink.cmp loads it
+-- automatically when installed: https://github.com/rafamadriz/friendly-snippets
 --
 -- vim.pack.add { gh 'rafamadriz/friendly-snippets' }
--- require('luasnip.loaders.from_vscode').lazy_load()
 
 -- [[ Autocomplete Engine ]]
+-- NOTE: You can also specify plugin using a version range for its git tag.
+--  See `:help vim.version.range()` for more info
 vim.pack.add { { src = gh 'saghen/blink.cmp', version = vim.version.range '1.*' } }
 require('blink.cmp').setup {
   keymap = {
@@ -70,7 +66,7 @@ require('blink.cmp').setup {
     default = { 'lsp', 'path', 'snippets' },
   },
 
-  snippets = { preset = 'luasnip' },
+  snippets = { preset = 'default' },
 
   -- Blink.cmp includes an optional, recommended rust fuzzy matcher,
   -- which automatically downloads a prebuilt binary when enabled.
