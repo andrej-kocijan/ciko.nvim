@@ -30,6 +30,10 @@ local function gh(repo) return 'https://github.com/' .. repo end
 vim.pack.add { gh 'j-hui/fidget.nvim' }
 require('fidget').setup {}
 
+-- Gives lua_ls the Neovim runtime, plus the types of plugins you `require` in the current file.
+vim.pack.add { gh 'folke/lazydev.nvim' }
+require('lazydev').setup()
+
 --  This function gets run when an LSP attaches to a particular buffer.
 --    That is to say, every time a new file is opened that is associated with
 --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -113,29 +117,10 @@ local servers = {
     cmd = { 'clangd', '--query-driver=/opt/homebrew/bin/g++-*' },
   },
 
-  -- Special Lua config: uses on_init to inject Neovim runtime into workspace
-  -- so that lua_ls understands vim.* globals without lazydev.
+  -- Neovim runtime and plugin types come from lazydev (see above)
   lua_ls = {
     on_init = function(client)
       client.server_capabilities.documentFormattingProvider = false -- Disable formatting (formatting is done by stylua)
-      if client.workspace_folders then
-        local path = client.workspace_folders[1].name
-        if path ~= vim.fn.stdpath 'config' and (vim.uv.fs_stat(path .. '/.luarc.json') or vim.uv.fs_stat(path .. '/.luarc.jsonc')) then return end
-      end
-
-      local current_settings = client.config.settings --[[@as lspconfig.settings.lua_ls]]
-      client.config.settings.Lua = vim.tbl_deep_extend('force', current_settings.Lua or {}, {
-        runtime = {
-          version = 'LuaJIT',
-          path = { 'lua/?.lua', 'lua/?/init.lua' },
-        },
-        workspace = {
-          checkThirdParty = false,
-          -- NOTE: this is a lot slower and will cause issues when working on your own configuration.
-          --  See https://github.com/neovim/nvim-lspconfig/issues/3189
-          library = vim.api.nvim_get_runtime_file('', true),
-        },
-      })
     end,
     settings = {
       Lua = {
